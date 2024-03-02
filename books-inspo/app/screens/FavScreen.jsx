@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../styles/constants';
 
 const styles = StyleSheet.create({
@@ -17,10 +17,12 @@ const styles = StyleSheet.create({
 
 export default function FavScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text} onPress={() => navigation.navigate('Home')}>
-        Favorites Screen
-      </Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <View style={styles.container}>
+        <Text style={styles.text} onPress={() => navigation.navigate('Home')}>
+          Favorites Screen
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }

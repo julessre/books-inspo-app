@@ -1,12 +1,20 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../styles/constants';
 // Screens
 import FavScreen from '../screens/FavScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+});
 
 // Screen names
 const homeName = 'Home';
@@ -50,7 +58,7 @@ const screenOptions = ({ route }) => ({
   },
   tabBarStyle: {
     padding: 20,
-    height: 90,
+    height: 80,
     backgroundColor: colors.background,
   },
   tabBarOptions: {
@@ -60,12 +68,29 @@ const screenOptions = ({ route }) => ({
 
 export default function Navigation() {
   return (
-    <NavigationContainer independent={true}>
-      <Tab.Navigator initialRouteName={homeName} screenOptions={screenOptions}>
-        <Tab.Screen name={homeName} component={HomeScreen} />
-        <Tab.Screen name={favName} component={FavScreen} />
-        <Tab.Screen name={profileName} component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer independent={true}>
+        <Tab.Navigator
+          initialRouteName={homeName}
+          screenOptions={screenOptions}
+        >
+          <Tab.Screen
+            name={homeName}
+            component={HomeScreen}
+            headerShown={false}
+          />
+          <Tab.Screen
+            name={favName}
+            component={FavScreen}
+            headerShown={false}
+          />
+          <Tab.Screen
+            name={profileName}
+            component={ProfileScreen}
+            headerShown={false}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }

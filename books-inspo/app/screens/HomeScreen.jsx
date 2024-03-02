@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
         style={styles.text}
         onPress={() => alert('This is the Home Screen.')}
       >
-        Home Screen
+        Book Title Author
       </Text>
     </View>
   );
