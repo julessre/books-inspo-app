@@ -25,18 +25,6 @@ const Tab = createBottomTabNavigator();
 
 const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
-    // <View
-    //   style={{
-    //     backgroundColor: colors.primaryColor,
-    //     borderRadius: 20,
-    //     padding: 10,
-    //     shadowColor: 'black',
-    //     shadowOpacity: 0.5,
-    //     shadowOffset: { width: 0, height: 2 },
-    //     shadowRadius: 2,
-    //     elevation: 5, // for Android
-    //   }}
-    // />;
     let iconName;
 
     if (route.name === homeName) {
@@ -53,17 +41,18 @@ const screenOptions = ({ route }) => ({
   tabBarActiveTintColor: colors.primaryColor,
   tabBarInactiveTintColor: colors.text,
   tabBarLabelStyle: {
-    paddingBottom: 10,
+    paddingBottom: 30,
     display: 'none',
   },
   tabBarStyle: {
-    padding: 20,
-    height: 80,
+    padding: 0,
+    height: 60,
     backgroundColor: colors.background,
   },
   tabBarOptions: {
     showLabel: false,
   },
+  headerShown: false,
 });
 
 export default function Navigation() {

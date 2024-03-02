@@ -1,3 +1,4 @@
+import { useFonts } from 'expo-font';
 import React from 'react';
 // import Slider from './_components/Slider';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';

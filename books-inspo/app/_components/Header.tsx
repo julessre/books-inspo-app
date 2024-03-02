@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.text,
-    fontFamily: 'Raleway_400Regular',
+    fontFamily: 'Raleway-Medium',
     fontSize: 32,
     textAlign: 'center',
   },
