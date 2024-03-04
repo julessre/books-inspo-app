@@ -8,13 +8,16 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "start": "expo start",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "migrate": "ley --require tsx/cjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/bottom-tabs": "^6.5.14",
     "@react-navigation/native": "^6.1.12",
     "@react-navigation/native-stack": "^6.9.20",
+    "@upleveled/ley": "^0.8.5",
+    "dotenv-safe": "^9.1.0",
     "expo": "~50.0.8",
     "expo-constants": "~15.4.5",
     "expo-font": "~11.10.3",
@@ -33,6 +36,7 @@
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
     "eslint-config-upleveled": "^7.8.1",
+    "ley": "^0.8.1",
     "prettier": "^3.2.5",
     "typescript": "^5.1.3"
   }
