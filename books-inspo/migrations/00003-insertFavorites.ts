@@ -1,4 +1,4 @@
-import { Sql } from 'postgres';
+// import { Sql } from 'postgres';
 
 // export async function up(sql: Sql) {
 //   for (const testUser of testUsers) {

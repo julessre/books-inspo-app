@@ -2,24 +2,24 @@ import { Sql } from 'postgres';
 
 export type Books = {
   id: number;
-  bookTitle: string;
+  title: string;
   author: string;
-  publishingDate: number;
+  publishingYear: number;
   description: string;
-  pages: number;
-  cover: string;
+  numberOfPages: number;
+  coverImageLink: string;
 };
 
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE books (
       id integer PRIMARY key generated always AS identity,
-      book_title varchar(100) NOT NULL,
+      title varchar(100) NOT NULL,
       author varchar(100) NOT NULL,
-      publishing_date integer,
-      description varchar(200) NOT NULL,
-      pages integer,
-      cover varchar(300),
+      publishing_year integer,
+      description varchar(1000) NOT NULL,
+      number_of_pages integer,
+      cover_image_link varchar(300)
     )
   `;
 }
