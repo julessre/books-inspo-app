@@ -73,12 +73,12 @@ export default function HomeScreen() {
         >
           Cleopatra and Frankenstein
         </Text>
+        <Text style={styles.textAuthor}>von Coco Mellors</Text>
         <FlatList
           data={books}
           renderItem={renderItem}
           keyExtractor={(item: Book) => item.id}
         />
-        <Text style={styles.textAuthor}>von Coco Mellors</Text>
       </View>
     </>
   );
