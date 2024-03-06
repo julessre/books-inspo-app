@@ -1,6 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../styles/constants';
+import BookItem from '../_components/GuestItem';
+
+export type Book = {
+  id: number;
+  title: string;
+  author: string;
+  publishingYear: number;
+  description: string;
+  numberOfPages: number;
+  coverImageLink: string;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -12,8 +23,8 @@ const styles = StyleSheet.create({
   infoBox: {
     flex: 0.4,
     backgroundColor: colors.background,
-    alignItems: 'left',
-    justifyContent: 'left',
+    // alignItems: 'left',
+    // justifyContent: 'left',
     // borderTopRightRadius: 50,
     // borderTopLeftRadius: 50,
     borderTopColor: colors.primaryColor,
@@ -34,11 +45,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomeScreen({ navigation }) {
+const renderItem = (item: { item: Book }) => <BookItem book={item.item} />;
+
+export default function HomeScreen() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    async function callApi() {
+      const response = await fetch('/books');
+      const fetchedBooks = await response.json();
+      // const selectedBooks = fetchedBooks.slice(0, 3);
+      setBooks(fetchedBooks);
+      console.log(fetchedBooks);
+    }
+    callApi().catch(console.error);
+  }, []);
+
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.text}>Bild</Text>
+        <Text>Bild</Text>
       </View>
       <View style={styles.infoBox}>
         <Text
@@ -47,6 +73,11 @@ export default function HomeScreen({ navigation }) {
         >
           Cleopatra and Frankenstein
         </Text>
+        <FlatList
+          data={books}
+          renderItem={renderItem}
+          keyExtractor={(item: Book) => item.id}
+        />
         <Text style={styles.textAuthor}>von Coco Mellors</Text>
       </View>
     </>

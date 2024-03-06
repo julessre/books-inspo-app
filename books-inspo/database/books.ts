@@ -7,9 +7,11 @@ export const getBooks = async () => {
       *
     FROM
       books
-    ORDER BY
-      id
-  `;
+    -- ORDER BY
+    --   id
+    WHERE
+      id=43
+        `;
 
   return books;
 };
