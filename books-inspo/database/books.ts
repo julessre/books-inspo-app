@@ -1,15 +1,15 @@
-import { User } from '../migrations/00000_createTableUsers';
+import { Books } from '../migrations/00004-createTableBooks';
 import { sql } from './connect';
 
-export const getUsers = async () => {
-  const users = await sql<User[]>`
+export const getBooks = async () => {
+  const books = await sql<Books[]>`
     SELECT
       *
     FROM
-      users
+      books
     ORDER BY
       id
   `;
 
-  return users;
+  return books;
 };
