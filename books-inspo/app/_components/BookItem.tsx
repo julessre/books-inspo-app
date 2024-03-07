@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import {
+  Dimensions,
   Image,
-  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../styles/constants';
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   // container: {
@@ -19,11 +21,13 @@ const styles = StyleSheet.create({
   // },
   itemContainer: {
     flexDirection: 'column', // or 'column' depending on your layout preference
-    height: '100%',
+    width,
+    height,
   },
   image: {
-    flex: 7,
+    flex: 12,
     height: 100,
+    resizeMode: 'cover',
   },
   infoBox: {
     backgroundColor: colors.background,
