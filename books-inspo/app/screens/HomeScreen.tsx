@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../styles/constants';
-import BookItem from '../_components/GuestItem';
+import BookItem from '../_components/BookItem';
 
-export type Book = {
-  id: number;
+type Book = {
+  id: string;
   title: string;
   author: string;
   publishingYear: number;
@@ -48,23 +48,21 @@ const styles = StyleSheet.create({
 const renderItem = (item: { item: Book }) => <BookItem book={item.item} />;
 
 export default function HomeScreen() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
     async function callApi() {
       const response = await fetch('/books');
       const fetchedBooks = await response.json();
-      // const selectedBooks = fetchedBooks.slice(0, 3);
-      setBooks(fetchedBooks);
+      setBooks(fetchedBooks.showBooks);
       console.log(fetchedBooks);
     }
     callApi().catch(console.error);
   }, []);
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Bild</Text>
+    <SafeAreaView>
+      {/* <Text>Bild</Text>
       </View>
       <View style={styles.infoBox}>
         <Text
@@ -73,13 +71,12 @@ export default function HomeScreen() {
         >
           Cleopatra and Frankenstein
         </Text>
-        <Text style={styles.textAuthor}>von Coco Mellors</Text>
-        <FlatList
-          data={books}
-          renderItem={renderItem}
-          keyExtractor={(item: Book) => item.id}
-        />
-      </View>
-    </>
+        <Text style={styles.textAuthor}>von Coco Mellors</Text> */}
+      <FlatList
+        data={books}
+        renderItem={renderItem}
+        keyExtractor={(item: Book) => item.id}
+      />
+    </SafeAreaView>
   );
 }

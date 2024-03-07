@@ -490,7 +490,7 @@ const books = [
     publishing_year: 2019,
     number_of_pages: 368,
     cover_image_link:
-      'https://m.media-amazon.com/images/I/81qXtewkNcL._AC_UF1000,1000_QL80_.jpg',
+      'https://images.thalia.media/-/BF2000-2000/cf6a2a2b61a540faa637e2d6b34db419/everything-i-know-about-love-taschenbuch-dolly-alderton-englisch.jpeg',
   },
 
   {
