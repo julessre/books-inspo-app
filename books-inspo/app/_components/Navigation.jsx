@@ -60,7 +60,7 @@ export default function Navigation() {
     <SafeAreaView style={styles.container}>
       <NavigationContainer
         independent={true}
-        screenOptions={{ headerShown: false }}
+        screenOptions={{ headerShown: false, headerStatusBarHeight: 0 }}
       >
         <Tab.Navigator
           initialRouteName={homeName}

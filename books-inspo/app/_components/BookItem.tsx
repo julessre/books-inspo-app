@@ -7,34 +7,26 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../styles/constants';
 
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: 'white',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
   itemContainer: {
-    flexDirection: 'column', // or 'column' depending on your layout preference
+    flexDirection: 'column',
     width,
     height,
-    alignItems: 'stretch',
-    flex: 1,
+    backgroundColor: colors.background,
   },
   image: {
     flex: 1,
-    height: 100,
-    resizeMode: 'cover',
+    height: height,
+    resizeMode: 'stretch',
+    marginTop: 20,
   },
   infoBox: {
     backgroundColor: colors.background,
     borderTopColor: colors.primaryColor,
-    borderTopStyle: 'solid',
     borderTopWidth: 4,
     padding: 20,
     paddingBottom: 0,
@@ -69,24 +61,22 @@ type Props = {
 
 export default function BookItem({ book }: Props) {
   const { id, title, author, coverImageLink } = book;
-  // const openBook = () => {
-  //   router.push({
-  //     pathname: `/books/[id]`,
-  //     params: { id },
-  //   });
-  // };
+  const openBook = () => {
+    router.push({
+      pathname: `/bookDetails/[id]`,
+      params: { id },
+    });
+  };
 
   return (
-    <SafeAreaView style={styles.itemContainer}>
+    <View style={styles.itemContainer}>
       <Image source={{ uri: coverImageLink }} style={styles.image} />
       <View style={styles.infoBox}>
-        <TouchableOpacity
-        // onPress={openBook}
-        >
+        <TouchableOpacity onPress={openBook}>
           <Text style={styles.textHeadline}>{title} </Text>
           <Text style={styles.textAuthor}>{author} </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

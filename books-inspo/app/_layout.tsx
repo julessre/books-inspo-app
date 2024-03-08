@@ -1,23 +1,22 @@
 import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
 // import { Slot, usePathname } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/constants';
-import Header from './_components/Header';
+// import Header from './_components/Header';
 import Navigation from './_components/Navigation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingBottom: 40,
-  },
-  // slot: {
-  //   flex: 1,
-  //   paddingLeft: 30,
-  //   paddingRight: 30,
-  // },
-});
+// const { width, height } = Dimensions.get('window');
+
+// const styles = StyleSheet.create({
+//   slot: {
+//     flexDirection: 'column',
+//     width,
+//     height,
+//     backgroundColor: colors.background,
+//   },
+// });
 
 // function routeMapping(pathname: string) {
 //   switch (pathname) {
@@ -46,6 +45,9 @@ export default function HomeLayout() {
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       {/* <Slider /> */}
       {/* <Header /> */}
+      {/* <View style={styles.slot}>
+        <Slot /> */}
+      {/* </View> */}
       <Navigation />
     </SafeAreaView>
   );
