@@ -1,35 +1,13 @@
-import Constants from 'expo-constants';
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../styles/constants';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import React from 'react';
+// import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: colors.cardBackground,
-    width: '100%',
-  },
-  container: {
-    paddingTop: Constants.statusBarHeight + 10,
-    paddingBottom: 20,
-  },
-  label: {
-    color: colors.text,
-    fontFamily: 'Raleway-Medium',
-    fontSize: 32,
-    textAlign: 'center',
-  },
-});
+// const Stack = createNativeStackNavigator();
 
-type Props = {
-  label: string;
-};
-
-export default function Header(props: Props) {
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.label}>{props.label}</Text>
-      </View>
-    </SafeAreaView>
-  );
-}
+// export default function Header() {
+//   return (
+//     <Stack.Navigator screenOptions={{ headerShown: false }}>
+//       <Stack.Screen name="BookItem" component={BookItem} />
+//     </Stack.Navigator>
+//   );
+// }

@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column', // or 'column' depending on your layout preference
     width,
     height,
+    alignItems: 'stretch',
+    flex: 1,
   },
   image: {
-    flex: 12,
+    flex: 1,
     height: 100,
     resizeMode: 'cover',
   },
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 4,
     padding: 20,
     paddingBottom: 0,
-    flex: 4,
+    flex: 0.6,
   },
 
   textHeadline: {

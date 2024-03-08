@@ -2,8 +2,8 @@ import { useFonts } from 'expo-font';
 // import { Slot, usePathname } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import Header from '../components/Header';
 import { colors } from '../styles/constants';
+import Header from './_components/Header';
 import Navigation from './_components/Navigation';
 
 const styles = StyleSheet.create({
@@ -45,6 +45,7 @@ export default function HomeLayout() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       {/* <Slider /> */}
+      {/* <Header /> */}
       <Navigation />
     </SafeAreaView>
   );

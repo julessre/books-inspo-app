@@ -58,7 +58,10 @@ const screenOptions = ({ route }) => ({
 export default function Navigation() {
   return (
     <SafeAreaView style={styles.container}>
-      <NavigationContainer independent={true}>
+      <NavigationContainer
+        independent={true}
+        screenOptions={{ headerShown: false }}
+      >
         <Tab.Navigator
           initialRouteName={homeName}
           screenOptions={screenOptions}
