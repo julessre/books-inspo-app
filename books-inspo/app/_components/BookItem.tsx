@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 4,
     padding: 20,
     paddingBottom: 0,
-    elevation: 5, // for Android
-    flex: 2,
+    flex: 4,
   },
 
   textHeadline: {

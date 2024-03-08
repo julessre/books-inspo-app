@@ -41,12 +41,12 @@ const screenOptions = ({ route }) => ({
   tabBarActiveTintColor: colors.primaryColor,
   tabBarInactiveTintColor: colors.text,
   tabBarLabelStyle: {
-    paddingBottom: 30,
+    paddingBottom: 20,
     display: 'none',
   },
   tabBarStyle: {
-    padding: 0,
-    height: 60,
+    height: 80,
+    paddingTop: 10,
     backgroundColor: colors.background,
   },
   tabBarOptions: {
