@@ -1,13 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../styles/constants';
+import RootNavigator from '../navigation/RootNavigator';
 // Screens
-import FavScreen from '../screens/FavScreen';
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import FavScreen from './FavScreen';
+import HomeScreen from './HomeScreen';
+import ProfileScreen from './ProfileScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,34 +57,22 @@ const screenOptions = ({ route }) => ({
   headerShown: false,
 });
 
-export default function Navigation() {
+export default function TabNavigator() {
   return (
-    <SafeAreaView style={styles.container}>
-      <NavigationContainer
-        independent={true}
-        screenOptions={{ headerShown: false, headerStatusBarHeight: 0 }}
-      >
-        <Tab.Navigator
-          initialRouteName={homeName}
-          screenOptions={screenOptions}
-        >
-          <Tab.Screen
-            name={homeName}
-            component={HomeScreen}
-            headerShown={false}
-          />
-          <Tab.Screen
-            name={favName}
-            component={FavScreen}
-            headerShown={false}
-          />
-          <Tab.Screen
-            name={profileName}
-            component={ProfileScreen}
-            headerShown={false}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <Tab.Navigator
+      initialRouteName={homeName}
+      screenOptions={screenOptions}
+      // independent={true}
+    >
+      <Tab.Screen name={homeName} component={HomeScreen} headerShown={false} />
+      <Tab.Screen name={favName} component={FavScreen} headerShown={false} />
+      <Tab.Screen
+        name={profileName}
+        component={ProfileScreen}
+        headerShown={false}
+      />
+    </Tab.Navigator>
+
+    // </SafeAreaView>
   );
 }

@@ -1,5 +1,6 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Slot } from 'expo-router';
+import { Redirect, Slot } from 'expo-router';
 // import React, { useEffect, useState } from 'react';
 // import Slider from './_components/Slider';
 import {
@@ -11,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import { colors } from '../styles/constants';
-import Navigation from './_components/Navigation';
+import TabNavigator from './(tabs)/_layout';
 
 // const styles = StyleSheet.create({
 //   container: {
@@ -23,9 +24,5 @@ import Navigation from './_components/Navigation';
 // });
 
 export default function App() {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      {/* <Navigation /> */}
-    </SafeAreaView>
-  );
+  return <Redirect href={'./(tabs)/HomeScreen'} />;
 }

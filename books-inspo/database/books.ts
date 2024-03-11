@@ -15,3 +15,16 @@ export const getBooks = async () => {
 
   return books;
 };
+
+export const getBookById = async (id: string) => {
+  const [book] = await sql<Books[]>`
+    SELECT
+      *
+    FROM
+      books
+    WHERE
+      id = ${id}
+  `;
+
+  return book;
+};

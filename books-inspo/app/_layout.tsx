@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Slot, Stack } from 'expo-router';
 // import { Slot, usePathname } from 'expo-router';
@@ -5,7 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/constants';
 // import Header from './_components/Header';
-import Navigation from './_components/Navigation';
+import TabNavigator from './(tabs)/_layout';
+import BookDetailsPage from './bookDetails/[id]';
 
 // const { width, height } = Dimensions.get('window');
 
@@ -45,10 +47,26 @@ export default function HomeLayout() {
   }
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Slot />
-      </View>
-      <Navigation />
+      {/* <View style={styles.container}>
+    //     <Slot />
+    //   </View> */}
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerTitle: '',
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="bookDetails/[id]"
+          options={{
+            title: 'Book Details',
+            headerBackTitleVisible: false,
+            // headerTintColor: 'black',
+          }}
+        />
+      </Stack>
     </SafeAreaView>
   );
 }
