@@ -30,16 +30,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView>
-      {/* <Text>Bild</Text>
-      </View>
-      <View style={styles.infoBox}>
-        <Text
-          style={styles.textHeadline}
-          onPress={() => alert('This is the Home Screen.')}
-        >
-          Cleopatra and Frankenstein
-        </Text>
-        <Text style={styles.textAuthor}>von Coco Mellors</Text> */}
+
       <FlatList
         data={books}
         renderItem={renderItem}

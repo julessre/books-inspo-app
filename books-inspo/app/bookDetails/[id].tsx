@@ -24,32 +24,32 @@ type Book = {
 };
 
 export default function BookDetailsPage() {
-  const { id } = useLocalSearchParams();
+  // const { id } = useLocalSearchParams();
+  // const [book, setBook] = useState<Book>();
 
-  const [book, setBook] = useState<Book>();
+  // useEffect(() => {
+  //   async function getBookById() {
+  //     if (typeof id !== 'string') {
+  //       return;
+  //     }
+  //     const response = await fetch(`/books/${id}`);
+  //     const fetchedBook = await response.json();
+  //     setBook(fetchedBook.showBooks);
+  //     console.log(fetchedBook);
+  //   }
+  //   getBookById().catch(console.error);
+  // }, []);
 
-  useEffect(() => {
-    async function callBook() {
-      if (typeof id !== 'string') {
-        return;
-      }
-      const response = await fetch(`/books/${id}`);
-      const fetchedBook = await response.json();
-      setBook(fetchedBook.showBooks);
-      console.log(fetchedBook);
-    }
-    callBook().catch(console.error);
-  }, [id]);
-
-  if (!book) {
-    return null;
-  }
+  // if (!book) {
+  //   return null;
+  // }
 
   return (
     <View>
       <Text>
-        {book.title} {book.author} {book.description} {book.publishingYear}{' '}
-        {book.numberOfPages}
+        {/* {book.title} {book.author} {book.description} {book.publishingYear}
+        {book.numberOfPages} */}
+        hallo
       </Text>
     </View>
   );

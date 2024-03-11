@@ -1,4 +1,5 @@
 import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
 // import React, { useEffect, useState } from 'react';
 // import Slider from './_components/Slider';
 import {
@@ -24,11 +25,7 @@ import Navigation from './_components/Navigation';
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      {/* <Slider /> */}
-      {/* <div>
-        <FlatList data={books} />
-      </div> */}
-      <Navigation />
+      {/* <Navigation /> */}
     </SafeAreaView>
   );
 }

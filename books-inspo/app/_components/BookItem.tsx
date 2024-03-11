@@ -2,12 +2,14 @@ import { router } from 'expo-router';
 import {
   Dimensions,
   Image,
+  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { colors } from '../../styles/constants';
+import BookDetailsPage from '../bookDetails/[id]';
 
 const { width, height } = Dimensions.get('window');
 
@@ -61,18 +63,20 @@ type Props = {
 
 export default function BookItem({ book }: Props) {
   const { id, title, author, coverImageLink } = book;
-  const openBook = () => {
-    router.push({
-      pathname: `/bookDetails/[id]`,
-      params: { id },
-    });
-  };
 
   return (
     <View style={styles.itemContainer}>
       <Image source={{ uri: coverImageLink }} style={styles.image} />
       <View style={styles.infoBox}>
-        <TouchableOpacity onPress={openBook}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            router.navigate({
+              pathname: '../bookDetails/[id]',
+              params: { id: book.id },
+            });
+          }}
+        >
           <Text style={styles.textHeadline}>{title} </Text>
           <Text style={styles.textAuthor}>{author} </Text>
         </TouchableOpacity>
