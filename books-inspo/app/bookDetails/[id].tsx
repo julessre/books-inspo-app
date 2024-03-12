@@ -53,7 +53,7 @@ export default function BookDetailsPage() {
       if (typeof id !== 'string') {
         return;
       }
-      const response = await fetch(`/book`, {
+      const response = await fetch(`/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
