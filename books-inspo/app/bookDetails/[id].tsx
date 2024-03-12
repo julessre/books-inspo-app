@@ -7,9 +7,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    padding: 20,
   },
   text: {
     color: colors.text,
+  },
+
+  textHeadline: {
+    fontSize: 35,
+    color: colors.text,
+    fontFamily: 'Raleway-Bold',
+    paddingBottom: 10,
+  },
+  textAuthor: {
+    fontSize: 25,
+    color: colors.text,
+    fontFamily: 'Raleway-Italic',
+  },
+  image: {
+    flex: 0.5,
+    resizeMode: 'contain',
+    marginTop: 20,
+    marginBottom: 20,
+    overflow: 'hidden',
   },
 });
 
@@ -33,7 +53,7 @@ export default function BookDetailsPage() {
       if (typeof id !== 'string') {
         return;
       }
-      const response = await fetch('/book', {
+      const response = await fetch(`/book`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -59,9 +79,15 @@ export default function BookDetailsPage() {
         </View>
       ) : ( */}
       <>
-        <Text>{singleBook.author}</Text>
-        <Text>{singleBook.description}hallo </Text>
-        <Image source={{ uri: singleBook.coverImageLink }} />
+        <Text style={styles.textHeadline}>{singleBook.title}</Text>
+        <Text style={styles.textAuthor}>{singleBook.author}</Text>
+        <Image
+          source={{ uri: singleBook.coverImageLink }}
+          style={styles.image}
+        />
+        <Text>{singleBook.publishingYear} </Text>
+        <Text>{singleBook.numberOfPages} </Text>
+        <Text>{singleBook.description} </Text>
       </>
       {/* )} */}
     </View>

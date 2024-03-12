@@ -32,19 +32,37 @@ export default function HomeLayout() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.container}>
-    //     <Slot />
-    //   </View> */}
-      {/* <NavigationContainer> */}
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTintColor: colors.text,
+          headerTitleStyle: {
+            fontFamily: 'Raleway-Bold',
+          },
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+        }}
+      >
         <Stack.Screen
           name="(tabs)"
           component={TabNavigator}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="bookDetails/[id]" component={BookDetailsPage} />
+        <Stack.Screen
+          name="bookDetails/[id]"
+          component={BookDetailsPage}
+          options={{
+            title: 'Book Details',
+
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            contentStyle: {
+              borderTopColor: colors.primaryColor,
+              borderTopWidth: 3,
+            },
+          }}
+        />
       </Stack.Navigator>
-      {/* </NavigationContainer> */}
     </SafeAreaView>
   );
 }
