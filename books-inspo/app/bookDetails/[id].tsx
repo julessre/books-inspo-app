@@ -10,8 +10,37 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: 20,
   },
+  table: {
+    flex: 0.75,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignContent: 'flex-start',
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  itemContainer: {
+    width: '50%',
+    height: 250,
+    borderColor: colors.background,
+    borderWidth: 4,
+  },
+
+  textIcon: {
+    color: colors.text,
+    fontSize: 20,
+    fontFamily: 'Raleway-Medium',
+    paddingLeft: 30,
+    paddingRight: 10,
+    paddingTop: 40,
+  },
+
   text: {
     color: colors.text,
+    fontSize: 20,
+    fontFamily: 'Raleway-Medium',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 
   textHeadline: {
@@ -26,11 +55,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway-Italic',
   },
   image: {
-    flex: 0.5,
+    flex: 2,
     resizeMode: 'contain',
     marginTop: 20,
-    marginBottom: 20,
-    overflow: 'hidden',
+    // overflow: 'hidden',
   },
 });
 
@@ -82,20 +110,25 @@ export default function BookDetailsPage() {
       <>
         <Text style={styles.textHeadline}>{singleBook.title}</Text>
         <Text style={styles.textAuthor}>{singleBook.author}</Text>
-        <Image
-          source={{ uri: singleBook.coverImageLink }}
-          style={styles.image}
-        />
-        <Text>
-          <Ionicons name="calendar" size={30} color={colors.primaryColor} />
-          {singleBook.publishingYear}{' '}
-        </Text>
-        <Text>
-          {' '}
-          <Ionicons name="document" size={30} color={colors.primaryColor} />
-          {singleBook.numberOfPages}
-        </Text>
-        <Text>{singleBook.description} </Text>
+        <View style={styles.table}>
+          <Image
+            source={{ uri: singleBook.coverImageLink }}
+            style={styles.image}
+          />
+          <View style={styles.itemContainer}>
+            <Text style={styles.textIcon}>
+              <Ionicons name="calendar" size={30} color={colors.primaryColor} />
+              {'  '}
+              {singleBook.publishingYear}{' '}
+            </Text>
+            <Text style={styles.textIcon}>
+              <Ionicons name="document" size={30} color={colors.primaryColor} />
+              {'  '}
+              {singleBook.numberOfPages}
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.text}>{singleBook.description} </Text>
       </>
       {/* )} */}
     </View>
