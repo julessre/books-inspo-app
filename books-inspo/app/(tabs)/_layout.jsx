@@ -1,11 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../styles/constants';
-import RootNavigator from '../navigation/RootNavigator';
 // Screens
 import FavScreen from './FavScreen';
 import HomeScreen from './HomeScreen';
@@ -60,7 +58,7 @@ const screenOptions = ({ route }) => ({
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName={homeName}
+      // initialRouteName={homeName}
       screenOptions={screenOptions}
       // independent={true}
     >

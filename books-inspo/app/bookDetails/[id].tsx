@@ -25,8 +25,8 @@ type Book = {
 
 export default function BookDetailsPage() {
   const { id } = useLocalSearchParams();
-  const [book, setBook] = useState<Book>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [singleBook, setSingleBook] = useState<Book>();
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getBookById() {
@@ -40,30 +40,30 @@ export default function BookDetailsPage() {
         },
       });
       const fetchedBook = await response.json();
-      setBook(fetchedBook);
+      setSingleBook(fetchedBook.bookDetail);
       console.log(fetchedBook);
-      setIsLoading(false);
+      // setIsLoading(false);
     }
     getBookById().catch(console.error);
-  }, []);
+  }, [id]);
 
-  if (!book) {
+  if (!singleBook) {
     return null;
   }
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {/* {isLoading ? (
         <View style={styles.container}>
           <Text>Loading Book Details...</Text>
         </View>
-      ) : (
-        <>
-          <Text>{book.author}</Text>
-          <Text>{book.description}</Text>
-          <Image source={{ uri: book.coverImageLink }} />
-        </>
-      )}
+      ) : ( */}
+      <>
+        <Text>{singleBook.author}</Text>
+        <Text>{singleBook.description}hallo </Text>
+        <Image source={{ uri: singleBook.coverImageLink }} />
+      </>
+      {/* )} */}
     </View>
   );
 }

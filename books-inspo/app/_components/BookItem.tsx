@@ -1,4 +1,4 @@
-import { Link, router, useNavigation } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import {
   Dimensions,
   Image,
@@ -61,28 +61,16 @@ type Props = {
 
 export default function BookItem({ book }: Props) {
   const { id, title, author, coverImageLink } = book;
-  // const navigation = useNavigation();
-
-  // const openBookDetails = () => {
-  //   navigation.navigate(`bookDetails/[id]`, { id });
-  // };
 
   return (
     <View style={styles.itemContainer}>
       <Image source={{ uri: coverImageLink }} style={styles.image} />
       <View style={styles.infoBox}>
-        {/* <Link
-          href={{
-            pathname: `bookDetails/[id]`,
-            params: { id },
-          }}
-          asChild
-        > */}
         <TouchableOpacity
           onPress={() => {
-            router.push({
+            router.navigate({
               pathname: `bookDetails/[id]`,
-              params: { id },
+              params: { id: book.id },
             });
           }}
         >

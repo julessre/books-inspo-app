@@ -1,41 +1,26 @@
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import { Slot, Stack } from 'expo-router';
-// import { Slot, usePathname } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import { Slot } from 'expo-router';
 import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/constants';
-// import Header from './_components/Header';
 import TabNavigator from './(tabs)/_layout';
 import BookDetailsPage from './bookDetails/[id]';
 
 // const { width, height } = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
+const Stack = createNativeStackNavigator();
 
+const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: colors.background,
   },
 });
 
-// function routeMapping(pathname: string) {
-//   switch (pathname) {
-//     case '/':
-//       return 'Guest List';
-//     case '/new-guest':
-//       return 'New Guest';
-//     default:
-//       return '';
-//   }
-// }
-
 export default function HomeLayout() {
-  // const pathname = usePathname();
-  // const label = routeMapping(pathname);
   const [fontsLoaded] = useFonts({
     'Raleway-Medium': require('../assets/font/Raleway-Medium.ttf'),
     'Raleway-Italic': require('../assets/font/Raleway-Italic.ttf'),
@@ -46,27 +31,20 @@ export default function HomeLayout() {
     return null;
   }
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.container}>
       {/* <View style={styles.container}>
     //     <Slot />
     //   </View> */}
-      <Stack screenOptions={{ headerShown: false }}>
+      {/* <NavigationContainer> */}
+      <Stack.Navigator>
         <Stack.Screen
           name="(tabs)"
-          options={{
-            headerTitle: '',
-            headerBackTitleVisible: false,
-          }}
+          component={TabNavigator}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="bookDetails/[id]"
-          options={{
-            title: 'Book Details',
-            headerBackTitleVisible: false,
-            // headerTintColor: 'black',
-          }}
-        />
-      </Stack>
+        <Stack.Screen name="bookDetails/[id]" component={BookDetailsPage} />
+      </Stack.Navigator>
+      {/* </NavigationContainer> */}
     </SafeAreaView>
   );
 }
