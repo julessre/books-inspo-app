@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../styles/constants';
 
 const styles = StyleSheet.create({
@@ -85,8 +86,15 @@ export default function BookDetailsPage() {
           source={{ uri: singleBook.coverImageLink }}
           style={styles.image}
         />
-        <Text>{singleBook.publishingYear} </Text>
-        <Text>{singleBook.numberOfPages} </Text>
+        <Text>
+          <Ionicons name="calendar" size={30} color={colors.primaryColor} />
+          {singleBook.publishingYear}{' '}
+        </Text>
+        <Text>
+          {' '}
+          <Ionicons name="document" size={30} color={colors.primaryColor} />
+          {singleBook.numberOfPages}
+        </Text>
         <Text>{singleBook.description} </Text>
       </>
       {/* )} */}
