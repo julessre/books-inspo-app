@@ -8,8 +8,7 @@ type BookParams = {
   };
 };
 
-export async function GET(params) {
-  console.log(params);
-  const bookDetail = await getBookById(params.bookId);
+export async function GET(request: Request, { bookId }: { bookId: string }) {
+  const bookDetail = await getBookById(bookId);
   return ExpoResponse.json({ bookDetail });
 }
