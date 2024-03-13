@@ -1,6 +1,6 @@
 import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../styles/constants';
 
 const styles = StyleSheet.create({
@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 15,
+    fontSize: 20,
     color: colors.text,
-    fontFamily: 'Raleway-Medium',
-    marginBottom: 20,
+    fontFamily: 'Raleway-Italic',
+    marginTop: 20,
     width: 250,
   },
   input: {
@@ -31,6 +31,28 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     width: 250,
+  },
+  button: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    marginTop: 25,
+    marginBottom: -30,
+    width: 150,
+    padding: 15,
+  },
+  buttonText: {
+    fontSize: 15,
+    color: colors.text,
+    fontFamily: 'Raleway-Medium',
+  },
+  loginText: {
+    marginTop: 40,
+    backgroundColor: colors.background,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -65,43 +87,73 @@ export default function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Please enter your username, password, name and email to register.
-      </Text>
+      <Text style={styles.title}>Username:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        // placeholder="Username"
         value={userName}
         onChangeText={setUserName}
       />
+      <Text style={styles.title}>Password:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        // placeholder="Password"
         secureTextEntry
         value={passwordHash}
         onChangeText={setPasswordHash}
       />
+      <Text style={styles.title}>First Name:</Text>
       <TextInput
         style={styles.input}
-        placeholder="First Name"
+        // placeholder="First Name"
         value={firstName}
         onChangeText={setFirstName}
       />
+      <Text style={styles.title}>Last Name:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Last Name"
+        // placeholder="Last Name"
         value={lastName}
         onChangeText={setLastName}
       />
+      <Text style={styles.title}>Email:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        // placeholder="Email"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
-      <Button title="Sign Up" onPress={handleSignup} />
-      <Button title="Go back to login" onPress={handleGoBack} />
+      <View>
+        <Pressable
+          accessibilityLabel="Save this book to my favorites"
+          onPress={handleSignup}
+          activateOpacity={0.3}
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? '#fff' : colors.primaryColor,
+            },
+          ]}
+        >
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </Pressable>
+        <Pressable
+          accessibilityLabel="Save this book to my favorites"
+          onPress={handleGoBack}
+          activateOpacity={0.3}
+          style={({ pressed }) => [
+            styles.loginText,
+            {
+              backgroundColor: pressed ? '#fff' : colors.background,
+              borderRadius: 20,
+              padding: 5,
+            },
+          ]}
+        >
+          <Text>Or go back to login</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
