@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/constants';
+import SignUp from './(auth)/signup';
 import TabNavigator from './(tabs)/_layout';
 import BookDetailsPage from './bookDetails/[id]';
 
@@ -56,11 +57,11 @@ export default function HomeLayout() {
             },
           }}
         />
-        {/* <Stack.Screen
-          name="(auth)"
-          component={BookDetailsPage}
+        <Stack.Screen
+          name="(auth)/signup"
+          component={SignUp}
           options={{
-            title: 'Login / Sign-up',
+            title: 'Sign-up',
 
             headerBackTitleVisible: false,
             headerShadowVisible: false,
@@ -69,7 +70,7 @@ export default function HomeLayout() {
               borderTopWidth: 3,
             },
           }}
-        /> */}
+        />
       </Stack.Navigator>
     </SafeAreaView>
   );

@@ -1,6 +1,38 @@
 import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { colors } from '../../styles/constants';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 15,
+    color: colors.text,
+    fontFamily: 'Raleway-Medium',
+    marginBottom: 20,
+    width: 250,
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderColor: colors.primaryColor,
+    fontSize: 15,
+    color: colors.text,
+    fontFamily: 'Raleway-Medium',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    margin: 10,
+    borderWidth: 2,
+    borderRadius: 20,
+    width: 250,
+  },
+});
 
 export default function SignUp() {
   const [userName, setUserName] = useState('');
@@ -10,7 +42,7 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
 
-  function handleSignup() {
+  async function handleSignup() {
     const userData = {
       userName,
       passwordHash,
@@ -18,7 +50,13 @@ export default function SignUp() {
       lastName,
       email,
     };
-    alert(JSON.stringify(userData));
+    const signUpRequest = await fetch(`/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userData }),
+    }).catch(console.error);
+    const signUpResponse = await signUpRequest.json();
+    console.log('signup:', signUpResponse);
   }
 
   const handleGoBack = () => {
@@ -27,9 +65,8 @@ export default function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
       <Text style={styles.title}>
-        Please enter your username, password, name and email to register.{' '}
+        Please enter your username, password, name and email to register.
       </Text>
       <TextInput
         style={styles.input}

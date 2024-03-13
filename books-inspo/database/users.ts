@@ -13,3 +13,28 @@ export const getUsers = async () => {
 
   return users;
 };
+
+export async function createUser(
+  firstName: string,
+  lastName: string,
+  userName: string,
+  email: string,
+  passwordHash: string,
+) {
+  const [user] = await sql<User[]>`
+       INSERT INTO
+       users(username, password_hash, firstname, lastname, email)
+      VALUES
+        (
+      ${userName},
+      ${passwordHash},
+      ${firstName},
+      ${lastName},
+      ${email}
+        )
+      RETURNING
+        id,
+        username
+    `;
+  return user;
+}
