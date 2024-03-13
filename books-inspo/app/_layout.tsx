@@ -1,15 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import { Slot } from 'expo-router';
-import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/constants';
 import TabNavigator from './(tabs)/_layout';
 import BookDetailsPage from './bookDetails/[id]';
-
-// const { width, height } = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();
 

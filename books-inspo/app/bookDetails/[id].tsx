@@ -1,8 +1,9 @@
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../styles/constants';
+import FavButton from '../_components/FavButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,9 +16,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'flex-start',
-    paddingTop: 20,
+    paddingTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    marginBottom: 40,
   },
   itemContainer: {
     width: '50%',
@@ -60,6 +62,20 @@ const styles = StyleSheet.create({
     marginTop: 20,
     // overflow: 'hidden',
   },
+  descriptionContainer: {
+    marginTop: 50,
+  },
+  button: {
+    flex: 0.5,
+    backgroundColor: colors.primaryColor,
+    fontSize: 20,
+    color: colors.text,
+    fontFamily: 'Raleway-Bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    marginTop: 90,
+  },
 });
 
 type Book = {
@@ -75,7 +91,7 @@ type Book = {
 export default function BookDetailsPage() {
   const { id } = useLocalSearchParams();
   const [singleBook, setSingleBook] = useState<Book>();
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getBookById() {
@@ -91,7 +107,7 @@ export default function BookDetailsPage() {
       const fetchedBook = await response.json();
       setSingleBook(fetchedBook.bookDetail);
       console.log(fetchedBook);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
     getBookById().catch(console.error);
   }, [id]);
@@ -102,35 +118,48 @@ export default function BookDetailsPage() {
 
   return (
     <View style={styles.container}>
-      {/* {isLoading ? (
+      {isLoading ? (
         <View style={styles.container}>
           <Text>Loading Book Details...</Text>
         </View>
-      ) : ( */}
-      <>
-        <Text style={styles.textHeadline}>{singleBook.title}</Text>
-        <Text style={styles.textAuthor}>{singleBook.author}</Text>
-        <View style={styles.table}>
-          <Image
-            source={{ uri: singleBook.coverImageLink }}
-            style={styles.image}
-          />
-          <View style={styles.itemContainer}>
-            <Text style={styles.textIcon}>
-              <Ionicons name="calendar" size={30} color={colors.primaryColor} />
-              {'  '}
-              {singleBook.publishingYear}{' '}
-            </Text>
-            <Text style={styles.textIcon}>
-              <Ionicons name="document" size={30} color={colors.primaryColor} />
-              {'  '}
-              {singleBook.numberOfPages}
-            </Text>
+      ) : (
+        <>
+          <Text style={styles.textHeadline}>{singleBook.title}</Text>
+          <Text style={styles.textAuthor}>{singleBook.author}</Text>
+          <View style={styles.table}>
+            <Image
+              source={{ uri: singleBook.coverImageLink }}
+              style={styles.image}
+            />
+            <View style={styles.itemContainer}>
+              <Text style={styles.textIcon}>
+                <Ionicons
+                  name="calendar"
+                  size={30}
+                  color={colors.primaryColor}
+                />
+                {'  '}
+                {singleBook.publishingYear}{' '}
+              </Text>
+              <Text style={styles.textIcon}>
+                <Ionicons
+                  name="document"
+                  size={30}
+                  color={colors.primaryColor}
+                />
+                {'  '}
+                {singleBook.numberOfPages}
+              </Text>
+            </View>
           </View>
-        </View>
-        <Text style={styles.text}>{singleBook.description} </Text>
-      </>
-      {/* )} */}
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.text}>{singleBook.description} </Text>
+          </View>
+          <View>
+            <FavButton />
+          </View>
+        </>
+      )}
     </View>
   );
 }
