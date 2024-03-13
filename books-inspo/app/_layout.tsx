@@ -56,6 +56,20 @@ export default function HomeLayout() {
             },
           }}
         />
+        {/* <Stack.Screen
+          name="(auth)"
+          component={BookDetailsPage}
+          options={{
+            title: 'Login / Sign-up',
+
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            contentStyle: {
+              borderTopColor: colors.primaryColor,
+              borderTopWidth: 3,
+            },
+          }}
+        /> */}
       </Stack.Navigator>
     </SafeAreaView>
   );

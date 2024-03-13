@@ -1,20 +1,43 @@
 import { Sql } from 'postgres';
 
 const testUsers = [
-  { id: 1, firstName: 'Viktor', lastName: 'Piwald', passwordHash: 'password' },
-  { id: 2, firstName: 'Max', lastName: 'Wimmer', passwordHash: 'password' },
-  { id: 3, firstName: 'Claudia', lastName: 'Bauer', passwordHash: 'password' },
+  {
+    id: 1,
+    userName: 'Vipi',
+    firstName: 'Viktor',
+    lastName: 'Piwald',
+    passwordHash: 'password',
+    email: 'vipi@email.com',
+  },
+  {
+    id: 2,
+    userName: 'Mawi',
+    firstName: 'Max',
+    lastName: 'Wimmer',
+    passwordHash: 'password',
+    email: 'mawi@email.com',
+  },
+  {
+    id: 3,
+    userName: 'Claba',
+    firstName: 'Claudia',
+    lastName: 'Bauer',
+    passwordHash: 'password',
+    email: 'claba@email.com',
+  },
 ];
 
 export async function up(sql: Sql) {
   for (const testUser of testUsers) {
     await sql`
-    INSERT INTO users(firstname, lastname, password_hash)
+    INSERT INTO users(username, password_hash, firstname, lastname, email)
     VALUES
     (
+      ${testUser.userName},
+      ${testUser.passwordHash},
       ${testUser.firstName},
       ${testUser.lastName},
-      ${testUser.passwordHash}
+    ${testUser.email}
     )
   `;
   }
