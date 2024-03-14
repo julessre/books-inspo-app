@@ -14,13 +14,13 @@ export const getUsers = async () => {
   return users;
 };
 
-export async function createUser(
+export const createUser = async (
+  userName: string,
+  passwordHash: string,
   firstName: string,
   lastName: string,
-  userName: string,
   email: string,
-  passwordHash: string,
-) {
+) => {
   const [user] = await sql<User[]>`
        INSERT INTO
        users(username, password_hash, firstname, lastname, email)
@@ -37,4 +37,17 @@ export async function createUser(
         username
     `;
   return user;
-}
+};
+
+export const getUserByUsername = async (username: string) => {
+  const [user] = await sql<User[]>`
+    SELECT
+      id,
+      username
+    FROM
+      users
+    WHERE
+      username = ${username.toLowerCase()}
+  `;
+  return user;
+};

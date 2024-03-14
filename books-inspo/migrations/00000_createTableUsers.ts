@@ -1,14 +1,5 @@
 import { Sql } from 'postgres';
 
-export type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  passwordHash: string;
-};
-
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (
