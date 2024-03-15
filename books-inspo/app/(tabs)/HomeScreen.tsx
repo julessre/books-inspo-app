@@ -20,7 +20,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     async function callApi() {
-      const response = await fetch('/books');
+      const response = await fetch('/api/books');
       const fetchedBooks = await response.json();
       setBooks(fetchedBooks.showBooks);
       console.log(fetchedBooks);

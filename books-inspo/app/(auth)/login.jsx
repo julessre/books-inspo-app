@@ -15,9 +15,10 @@ import {
 import { z } from 'zod';
 import { colors } from '../../styles/constants';
 
+// change min to larger number after testing!!!
 const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  passwordHash: z.string().min(1),
 });
 
 const styles = StyleSheet.create({
@@ -80,27 +81,36 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [passwordHash, setPasswordHash] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isError, setIsError] = useState('');
+  const [error, setError] = useState('');
   const navigation = useNavigation();
 
   async function handleLogin() {
+    const userData = {
+      email,
+      passwordHash,
+    };
+
     // input validation
-    const validateLogin = loginSchema.safeParse({ email, passwordHash });
-    if (!validateLogin.success) {
-      setErrorMessage('Email or password invalid');
-      setIsError(true);
+    const validatedLogin = loginSchema.safeParse(userData);
+    console.log('validated Login:', validatedLogin);
+    console.log('userData:', userData);
+    if (!validatedLogin.success) {
+      setErrorMessage('E-Mail or password invalid');
+      setError(true);
     } else {
-      const userData = {
-        email,
-        passwordHash,
-      };
-      const loginRequest = await fetch(`/login`, {
+      const response = await fetch(`/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
       }).catch(console.error);
-      const loginResponse = await loginRequest.json();
-      console.log('signup:', loginResponse);
+      console.log(validatedLogin);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.message);
+        setError(true);
+      }
     }
   }
 
@@ -131,7 +141,13 @@ export default function Login() {
               value={passwordHash}
               onChangeText={setPasswordHash}
             />
-
+            <Text
+              type="error"
+              style={{ color: 'red' }}
+              visible={error ? true : false}
+            >
+              {errorMessage}
+            </Text>
             <View>
               <Pressable
                 accessibilityLabel="Login"

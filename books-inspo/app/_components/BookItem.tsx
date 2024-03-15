@@ -1,4 +1,4 @@
-import { router, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import {
   Dimensions,
   Image,
@@ -60,7 +60,7 @@ type Props = {
 };
 
 export default function BookItem({ book }: Props) {
-  const { id, title, author, coverImageLink } = book;
+  const { title, author, coverImageLink } = book;
 
   return (
     <View style={styles.itemContainer}>
@@ -77,7 +77,6 @@ export default function BookItem({ book }: Props) {
           <Text style={styles.textHeadline}>{title} </Text>
           <Text style={styles.textAuthor}>{author} </Text>
         </TouchableOpacity>
-        {/* </Link> */}
       </View>
     </View>
   );
