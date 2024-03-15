@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+// import { router } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../styles/constants';
@@ -34,6 +34,19 @@ export default function ProfileScreen({ navigation }) {
         ]}
       >
         <Text style={styles.buttonText}>Sign up</Text>
+      </Pressable>
+      <Pressable
+        accessibilityLabel="Login to see your profile"
+        onPress={() => navigation.navigate('(auth)/login')}
+        activateOpacity={0.3}
+        style={({ pressed }) => [
+          styles.button,
+          {
+            backgroundColor: pressed ? '#fff' : colors.primaryColor,
+          },
+        ]}
+      >
+        <Text style={styles.buttonText}>Login</Text>
       </Pressable>
     </View>
   );

@@ -1,26 +1,19 @@
 import { ExpoResponse } from 'expo-router/server';
-import { createUser, getUserByUsername } from '../database/users';
+import { createUser, getUserByEmail } from '../../database/users';
 
 type User = {
   id: number;
-  firstName: string;
-  lastName: string;
-  userName: string;
   email: string;
   passwordHash: string;
+  firstName: string;
+  lastName: string;
 };
 
 export async function POST(request: Request) {
   const userData: User = await request.json();
-  const { userName, passwordHash, firstName, lastName, email } = userData;
+  const { email, passwordHash, firstName, lastName } = userData;
 
-  const newUser = await createUser(
-    userName,
-    passwordHash,
-    firstName,
-    lastName,
-    email,
-  );
+  const newUser = await createUser(email, passwordHash, firstName, lastName);
   console.log(newUser);
   if (!newUser) {
     //   return ExpoResponse.json({ success: true, user: newUser });
@@ -31,7 +24,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const user = await getUserByUsername(newUser.data.username);
+  const user = await getUserByEmail(newUser.email);
 
   if (user) {
     return ExpoResponse.json(

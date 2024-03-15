@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 250,
   },
+  inputContainer: {
+    marginTop: 30,
+  },
   input: {
     backgroundColor: '#fff',
     borderColor: colors.primaryColor,
@@ -68,20 +71,19 @@ const styles = StyleSheet.create({
 });
 
 export default function SignUp() {
-  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [passwordHash, setPasswordHash] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const navigation = useNavigation();
 
+  // signup for users
   async function handleSignup() {
     const userData = {
-      userName,
+      email,
       passwordHash,
       firstName,
       lastName,
-      email,
     };
     const signUpRequest = await fetch(`/signup`, {
       method: 'POST',
@@ -90,6 +92,14 @@ export default function SignUp() {
     }).catch(console.error);
     const signUpResponse = await signUpRequest.json();
     console.log('signup:', signUpResponse);
+
+    //   // redirect to login screen
+    //   if (signUpResponse.success) {
+    //     router.navigate({
+    //       pathname: './login',
+    //       params: { email: email },
+    //     });
+    //   }
   }
 
   const handleGoBack = () => {
@@ -103,12 +113,13 @@ export default function SignUp() {
     >
       <ScrollView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
-            <Text style={styles.title}>Username:</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.title}>Email:</Text>
             <TextInput
               style={styles.input}
-              value={userName}
-              onChangeText={setUserName}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={setEmail}
             />
             <Text style={styles.title}>Password:</Text>
             <TextInput
@@ -129,16 +140,9 @@ export default function SignUp() {
               value={lastName}
               onChangeText={setLastName}
             />
-            <Text style={styles.title}>Email:</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
-            />
             <View>
               <Pressable
-                accessibilityLabel="Save this book to my favorites"
+                accessibilityLabel="Sign up"
                 onPress={handleSignup}
                 activateOpacity={0.3}
                 style={({ pressed }) => [
@@ -151,7 +155,7 @@ export default function SignUp() {
                 <Text style={styles.buttonText}>Sign Up</Text>
               </Pressable>
               <Pressable
-                accessibilityLabel="Save this book to my favorites"
+                accessibilityLabel="Or go back to login"
                 onPress={handleGoBack}
                 activateOpacity={0.3}
                 style={({ pressed }) => [

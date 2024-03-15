@@ -1,5 +1,12 @@
-import { User } from '../migrations/00000_createTableUsers';
 import { sql } from './connect';
+
+type User = {
+  id: number;
+  email: string;
+  passwordHash: string;
+  firstName: string;
+  lastName: string;
+};
 
 export const getUsers = async () => {
   const users = await sql<User[]>`
@@ -15,39 +22,37 @@ export const getUsers = async () => {
 };
 
 export const createUser = async (
-  userName: string,
+  email: string,
   passwordHash: string,
   firstName: string,
   lastName: string,
-  email: string,
 ) => {
   const [user] = await sql<User[]>`
        INSERT INTO
-       users(username, password_hash, firstname, lastname, email)
+       users(email, password_hash, firstname, lastname)
       VALUES
         (
-      ${userName},
+      ${email},
       ${passwordHash},
       ${firstName},
-      ${lastName},
-      ${email}
+      ${lastName}
         )
       RETURNING
         id,
-        username
+        email
     `;
   return user;
 };
 
-export const getUserByUsername = async (username: string) => {
+export const getUserByEmail = async (email: string) => {
   const [user] = await sql<User[]>`
     SELECT
       id,
-      username
+      email
     FROM
       users
     WHERE
-      username = ${username.toLowerCase()}
+      email = ${email}
   `;
   return user;
 };

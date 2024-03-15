@@ -1,11 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { colors } from '../styles/constants';
+import Login from './(auth)/login';
 import SignUp from './(auth)/signup';
 import TabNavigator from './(tabs)/_layout';
 import BookDetailsPage from './bookDetails/[id]';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
@@ -62,6 +64,20 @@ export default function HomeLayout() {
           component={SignUp}
           options={{
             title: 'Sign-up',
+
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            contentStyle: {
+              borderTopColor: colors.primaryColor,
+              borderTopWidth: 3,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(auth)/login"
+          component={Login}
+          options={{
+            title: 'Login',
 
             headerBackTitleVisible: false,
             headerShadowVisible: false,

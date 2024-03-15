@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../styles/constants';
+import { FlatList, SafeAreaView } from 'react-native';
+// import { colors } from '../../styles/constants';
 import BookItem from '../_components/BookItem';
 
 type Book = {
@@ -30,7 +30,6 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView>
-
       <FlatList
         data={books}
         renderItem={renderItem}

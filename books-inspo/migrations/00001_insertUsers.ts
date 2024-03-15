@@ -3,7 +3,6 @@ import { Sql } from 'postgres';
 const testUsers = [
   {
     id: 1,
-    userName: 'Vipi',
     firstName: 'Viktor',
     lastName: 'Piwald',
     passwordHash: 'password',
@@ -11,7 +10,6 @@ const testUsers = [
   },
   {
     id: 2,
-    userName: 'Mawi',
     firstName: 'Max',
     lastName: 'Wimmer',
     passwordHash: 'password',
@@ -19,7 +17,6 @@ const testUsers = [
   },
   {
     id: 3,
-    userName: 'Claba',
     firstName: 'Claudia',
     lastName: 'Bauer',
     passwordHash: 'password',
@@ -30,14 +27,13 @@ const testUsers = [
 export async function up(sql: Sql) {
   for (const testUser of testUsers) {
     await sql`
-    INSERT INTO users(username, password_hash, firstname, lastname, email)
+    INSERT INTO users(email, password_hash, firstname, lastname)
     VALUES
     (
-      ${testUser.userName},
+      ${testUser.email},
       ${testUser.passwordHash},
       ${testUser.firstName},
-      ${testUser.lastName},
-    ${testUser.email}
+      ${testUser.lastName}
     )
   `;
   }
