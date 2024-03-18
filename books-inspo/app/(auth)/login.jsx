@@ -93,7 +93,6 @@ export default function Login() {
     // input validation
     const validatedLogin = loginSchema.safeParse(userData);
     console.log('validated Login:', validatedLogin);
-    console.log('userData:', userData);
     if (!validatedLogin.success) {
       setErrorMessage('E-Mail or password invalid');
       setError(true);
@@ -103,19 +102,23 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
       }).catch(console.error);
-      console.log(validatedLogin);
 
       const data = await response.json();
+      console.log('fetched data:', data);
 
       if (!response.ok) {
-        setErrorMessage(data.message);
+        setErrorMessage(data.errors[0].message);
         setError(true);
+      }
+
+      if (response.ok) {
+        console.log('login is working');
       }
     }
   }
 
-  const handleGoBack = () => {
-    navigation.goBack();
+  const handleGoToSignup = () => {
+    router.push('/signup');
   };
 
   return (
@@ -131,7 +134,11 @@ export default function Login() {
               style={styles.input}
               keyboardType="email-address"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => {
+                setEmail(text);
+                setError('false');
+                setErrorMessage('');
+              }}
             />
 
             <Text style={styles.title}>Password:</Text>
@@ -139,7 +146,11 @@ export default function Login() {
               style={styles.input}
               secureTextEntry
               value={passwordHash}
-              onChangeText={setPasswordHash}
+              onChangeText={(text) => {
+                setPasswordHash(text);
+                setError('false');
+                setErrorMessage('');
+              }}
             />
             <Text
               type="error"
@@ -164,7 +175,7 @@ export default function Login() {
               </Pressable>
               <Pressable
                 accessibilityLabel="Or register here!"
-                onPress={handleGoBack}
+                onPress={handleGoToSignup}
                 activateOpacity={0.3}
                 style={({ pressed }) => [
                   styles.loginText,

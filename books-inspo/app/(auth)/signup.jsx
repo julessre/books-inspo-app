@@ -1,4 +1,4 @@
-import { useNavigation } from 'expo-router';
+import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import {
   Keyboard,
@@ -12,7 +12,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { z } from 'zod';
 import { colors } from '../../styles/constants';
+
+const signupSchema = z.object({
+  email: z.string().email(),
+  passwordHash: z.string().min(1),
+  firstName: z.string(),
+  lastName: z.string(),
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -71,10 +79,13 @@ const styles = StyleSheet.create({
 });
 
 export default function SignUp() {
+  const local = useLocalSearchParams();
   const [email, setEmail] = useState('');
   const [passwordHash, setPasswordHash] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
   const navigation = useNavigation();
 
   // signup for users
@@ -85,25 +96,43 @@ export default function SignUp() {
       firstName,
       lastName,
     };
-    const signUpRequest = await fetch(`/api/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    }).catch(console.error);
-    const signUpResponse = await signUpRequest.json();
-    console.log('signup:', signUpResponse);
+    const validatedNewUser = signupSchema.safeParse(userData);
+    console.log('validated signup:', validatedNewUser);
+    console.log('userData:', userData);
 
-    //   // redirect to login screen
-    //   if (signUpResponse.success) {
-    //     router.navigate({
-    //       pathname: './login',
-    //       params: { email: email },
-    //     });
-    //   }
+    if (!validatedNewUser.success) {
+      setErrorMessage('E-Mail already taken');
+      setError(true);
+    } else {
+      const response = await fetch(`/api/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      }).catch(console.error);
+      const data = await response.json();
+      console.log('signup:', data);
+
+      if (!response.ok) {
+        setErrorMessage(data.errors[0].message);
+        setError(true);
+      }
+      if (response.success) {
+        // redirect to login screen
+        router.navigate({
+          pathname: '/login',
+          params: local,
+        });
+      }
+
+      if ('errors' in data) {
+        setError(data.errors);
+        return;
+      }
+    }
   }
 
-  const handleGoBack = () => {
-    navigation.goBack();
+  const handleGoToLogin = () => {
+    router.push('/login');
   };
 
   return (
@@ -119,7 +148,11 @@ export default function SignUp() {
               style={styles.input}
               keyboardType="email-address"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => {
+                setEmail(text);
+                setError('false');
+                setErrorMessage('');
+              }}
             />
             <Text style={styles.title}>Password:</Text>
             <TextInput
@@ -140,10 +173,17 @@ export default function SignUp() {
               value={lastName}
               onChangeText={setLastName}
             />
+            <Text
+              type="error"
+              style={{ color: 'red' }}
+              visible={error ? true : false}
+            >
+              {errorMessage}
+            </Text>
             <View>
               <Pressable
                 accessibilityLabel="Sign up"
-                onPress={handleSignup}
+                onPress={handleGoToLogin}
                 activateOpacity={0.3}
                 style={({ pressed }) => [
                   styles.button,

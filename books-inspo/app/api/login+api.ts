@@ -1,27 +1,47 @@
 import { ExpoResponse } from 'expo-router/server';
 import { z } from 'zod';
+import { getUserByEmail } from '../../database/users';
 
 type User = {
   email: string;
   passwordHash: string;
 };
 
-export const loginSchema = z.object({
-  email: z.string().min(5),
-  password: z.string().min(3),
+const loginSchema = z.object({
+  email: z.string().email(),
+  passwordHash: z.string().min(1),
 });
 
 export async function POST(request: Request) {
-  const userData: User = await request.json();
-  const validatedLogin = loginSchema.safeParse(userData);
-  console.log(userData);
+  const body = await request.json();
+  console.log('before z', body);
+  const result = loginSchema.safeParse(body);
+  console.log('after z', result);
 
-  if (!validatedLogin.success) {
+  if (!result.success) {
     return ExpoResponse.json(
-      { errors: 'Email or password invalid' },
+      { errors: [{ message: 'test' }] },
       {
         status: 400,
       },
     );
   }
+
+  const userWithPasswordHash = await getUserByEmail(result.data.email);
+  // console.log(userWithPasswordHash);
+
+  if (!userWithPasswordHash) {
+    return ExpoResponse.json(
+      {
+        errors: [{ message: 'email or password not valid' }],
+      },
+      { status: 403 },
+    );
+  }
+
+  return ExpoResponse.json({
+    user: {
+      email: userWithPasswordHash.email,
+    },
+  });
 }

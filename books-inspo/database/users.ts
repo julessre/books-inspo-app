@@ -1,6 +1,6 @@
 import { sql } from './connect';
 
-type User = {
+export type User = {
   id: number;
   email: string;
   passwordHash: string;
@@ -47,8 +47,7 @@ export const createUser = async (
 export const getUserByEmail = async (email: string) => {
   const [user] = await sql<User[]>`
     SELECT
-      id,
-      email
+      *
     FROM
       users
     WHERE
