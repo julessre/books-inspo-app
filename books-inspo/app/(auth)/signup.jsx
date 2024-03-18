@@ -86,7 +86,6 @@ export default function SignUp() {
   const [lastName, setLastName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [error, setError] = useState('');
-  const navigation = useNavigation();
 
   // signup for users
   async function handleSignup() {
@@ -112,16 +111,17 @@ export default function SignUp() {
       const data = await response.json();
       console.log('signup:', data);
 
-      if (!response.ok) {
-        setErrorMessage(data.errors[0].message);
-        setError(true);
-      }
-      if (response.success) {
+      if (response.ok) {
         // redirect to login screen
         router.navigate({
           pathname: '/login',
           params: local,
         });
+      }
+
+      if (!response.ok) {
+        setErrorMessage(data.errors[0].message);
+        setError(true);
       }
 
       if ('errors' in data) {
@@ -183,7 +183,7 @@ export default function SignUp() {
             <View>
               <Pressable
                 accessibilityLabel="Sign up"
-                onPress={handleGoToLogin}
+                onPress={handleSignup}
                 activateOpacity={0.3}
                 style={({ pressed }) => [
                   styles.button,
@@ -196,7 +196,7 @@ export default function SignUp() {
               </Pressable>
               <Pressable
                 accessibilityLabel="Or go back to login"
-                onPress={handleGoBack}
+                onPress={handleGoToLogin}
                 activateOpacity={0.3}
                 style={({ pressed }) => [
                   styles.loginText,
